@@ -6,10 +6,12 @@ pipeline {
     }
 
     environment {
+        PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
         JAVA_HOME = "C:\\Program Files\\Java\\jdk-21"
         JMETER_HOME = "C:\\Tools\\apache-jmeter-5.6.3\\bin"
         RESULT_DIR = "results"
-
+        SONARQUBE_SERVER = 'SonarQubeServer'  // The name of the SonarQube server configured in Jenkins
+        SONAR_TOKEN = 'squ_36ddcb7129eea21de9e6ef95dd0081b14220ecce' // Store the token secure
         DOCKERHUB_REPO = "amirdirin/lectdemo3010_pod_jmeter_2026"
         DOCKER_IMAGE_TAG = "latest"
         DOCKERHUB_CREDENTIALS_ID = "Docker_Hub"
@@ -27,6 +29,22 @@ pipeline {
         stage('Build Maven') {
             steps {
                 bat 'mvn clean install'
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQubeServer') {
+                    bat """
+                                ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
+                                -Dsonar.projectKey=AverageSpeed ^
+                                -Dsonar.sources=src ^
+                                -Dsonar.projectName=AverageSpeed ^
+                                -Dsonar.host.url=http://localhost:9000 ^
+                                -Dsonar.login=${env.SONAR_TOKEN} ^
+                                -Dsonar.java.binaries=target/classes
+                            """
+                }
             }
         }
 
