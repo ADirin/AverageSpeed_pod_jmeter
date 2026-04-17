@@ -50,7 +50,16 @@ pipeline {
             }
         }
         */
-
+        stage('Debug JMeter Path') {
+            steps {
+                bat """
+        echo === Where is JMeter? ===
+        dir C:\\Tools
+        dir C:\\Tools\\jmeter
+        dir C:\\Tools\\jmeter\\bin
+        """
+            }
+        }
         stage('Run JMeter Performance Test') {
             steps {
                 bat """
