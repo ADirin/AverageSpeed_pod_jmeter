@@ -9,7 +9,8 @@ pipeline {
         PATH = "C:\\Program Files\\Git\\bin;${env.PATH}"
         //PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
         JAVA_HOME = "C:\\Program Files\\Java\\jdk-21"
-        JMETER_HOME = "C:\\Tools\\apache-jmeter-5.6.3\\bin"
+        JMETER_HOME = "C:\\Tools\\apache-jmeter-5.6.3"
+
         RESULT_DIR = "results"
         SONARQUBE_SERVER = 'SonarQubeServer'  // The name of the SonarQube server configured in Jenkins
         SONAR_TOKEN = 'squ_36ddcb7129eea21de9e6ef95dd0081b14220ecce' // Store the token secure
@@ -53,7 +54,7 @@ pipeline {
             steps {
                 bat """
         if not exist ${RESULT_DIR} mkdir ${RESULT_DIR}
-        "%JMETER_HOME%\\jmeter.bat" ^
+        "%JMETER_HOME%\\bin\\jmeter.bat" ^
           -n ^
           -t jmeter\\avg_speed_test.jmx ^
           -l ${RESULT_DIR}\\results.jtl ^
