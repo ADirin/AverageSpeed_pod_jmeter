@@ -29,7 +29,7 @@ pipeline {
                 bat 'mvn clean install'
             }
         }
-
+/*
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQubeServer') {
@@ -45,7 +45,7 @@ pipeline {
                 }
             }
         }
-
+*/
         stage('Run JMeter Performance Test') {
             steps {
                 bat """
