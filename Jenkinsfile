@@ -52,11 +52,17 @@ pipeline {
         stage('Run JMeter Performance Test') {
             steps {
                 bat """
-                if not exist ${RESULT_DIR} mkdir ${RESULT_DIR}
-                "%JMETER_HOME%\\jmeter.bat" -n -t jmeter\\avg_speed_test.jmx -l ${RESULT_DIR}\\results.jtl -e -o ${RESULT_DIR}\\report
-                """
+        if not exist ${RESULT_DIR} mkdir ${RESULT_DIR}
+        "%JMETER_HOME%\\jmeter.bat" ^
+          -n ^
+          -t jmeter\\avg_speed_test.jmx ^
+          -l ${RESULT_DIR}\\results.jtl ^
+          -Jjmeter.save.saveservice.output_format=csv ^
+          -e -o ${RESULT_DIR}\\report
+        """
             }
         }
+
 
         stage('Build Docker Image') {
             steps {
