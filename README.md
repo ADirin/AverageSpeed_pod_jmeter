@@ -22,12 +22,12 @@ AverageSpeed/
 └── results/
 ⚠️ The file avg_speed_test.jmx must exist in the project root unless paths are adjusted.
 
-🚀 Step 1: Verify the Application Is Running
+## 🚀 Step 1: Verify the Application Is Running
 Check that your Kubernetes pod is running:
 
-kubectl get pods -n avgspeed
+> kubectl get pods -n avgspeed
 Expected output:
-avgspeed2-app-xxxxx   1/1   Running
+> avgspeed2-app-xxxxx   1/1   Running
 
 🔁 Step 2: Port‑Forward the Application
 Expose the application locally so JMeter can access it:
