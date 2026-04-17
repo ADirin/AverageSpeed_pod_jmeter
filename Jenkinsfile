@@ -9,7 +9,7 @@ pipeline {
         JAVA_HOME = "C:\\Program Files\\Java\\jdk-21"
 
         // ✅ Keep only ONE JMeter path (global & Jenkins-visible)
-        JMETER_HOME = "C:\\Tools\\jmeter\\bin"
+        JMETER_HOME = "C:\\Tools\\apache-jmeter-5.6.3\\bin"
 
         RESULT_DIR = "results"
 
@@ -63,9 +63,9 @@ pipeline {
         stage('Run JMeter Performance Test') {
             steps {
                 bat """
-                if not exist ${RESULT_DIR} mkdir ${RESULT_DIR}
-                "%JMETER_HOME%\\jmeter.bat" -n -t jmeter\\avg_speed_test.jmx -l ${RESULT_DIR}\\results.jtl -e -o ${RESULT_DIR}\\report
-                """
+        if not exist ${RESULT_DIR} mkdir ${RESULT_DIR}
+        "%JMETER_HOME%\\jmeter.bat" -n -t jmeter\\avg_speed_test.jmx -l ${RESULT_DIR}\\results.jtl -e -o ${RESULT_DIR}\\report
+        """
             }
         }
 
