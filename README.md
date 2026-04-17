@@ -22,7 +22,7 @@ AverageSpeed/
 └── results/
 ⚠️ The file avg_speed_test.jmx must exist in the project root unless paths are adjusted.
 
-## 🚀 Step 1: Verify the Application Is Running
+### 🚀 Step 1: Verify the Application Is Running
 Check that your Kubernetes pod is running:
 
 > kubectl get pods -n avgspeed
@@ -31,38 +31,48 @@ Expected output:
 
 > avgspeed2-app-xxxxx   1/1   Running
 
-🔁 Step 2: Port‑Forward the Application
+### 🔁 Step 2: Port‑Forward the Application
 Expose the application locally so JMeter can access it:
-kubectl port-forward -n avgspeed deploy/avgspeed2-app 8082:8082
+
+> kubectl port-forward -n avgspeed deploy/avgspeed2-app 8082:8082
+
 ✅ Keep this terminal open while testing.
 
 Open a browser and visit:
 
-http://localhost:8082/
+> http://localhost:8082/
 
-📄 Step 3: Confirm the JMX File Exists
+### 📄 Step 3: Confirm the JMX File Exists
 Navigate to the project root, i have in the jmeter folder:
-c\...\Week6_Testing\AverageSpeed
+
+> c\...\Week6_Testing\AverageSpeed\jmeter
 
 Verify the JMX file:
-dir avg_speed_test.jmx
-You should see:
-avg_speed_test.jmx
 
-▶️ Step 6: Run JMeter (Non‑GUI Mode – Recommended)
+> dir avg_speed_test.jmx
+
+You should see:
+
+> avg_speed_test.jmx
+
+### ▶️ Step 4: Run JMeter (Non‑GUI Mode – Recommended)
 Execute the following command from the project root:
 
 > jmeter -t jmeter\avg_speed_test.jmx -l results\results.jtl -e -o result\report
 
 🔍 Command explanation
- -n    Run JMeter without GUI
--t     Path to JMeter test plan   
+-n    Run JMeter without GUI
+
+-t     Path to JMeter test plan
+
 -l     Raw results file (.jtl)
+
 -e -o  Generate HTML performance report
 
-📊 Step 7: View the Performance Report
+### 📊 Step 5: View the Performance Report
 Open in a browser:
-results/report/index.html
+
+> results/report/index.html
 
 The report includes:
 
@@ -72,7 +82,7 @@ Error rate
 Percentiles (90 / 95 / 99)
 Latency distribution
 
-🧪 Step 8: Run JMeter GUI (Debug Only)
+### 🧪 Step 6: Run JMeter GUI (Debug Only)
 Use GUI mode only for debugging, not performance testing.
 
 > jmeter
@@ -83,7 +93,7 @@ File → Open → avg_speed_test.jmx
 Click ▶ Start
 Add listeners such as View Results Tree
 
-🛠 Troubleshooting
+## 🛠 Troubleshooting
 ❌ JMX file not found
 
 Ensure avg_speed_test.jmx exists
@@ -91,18 +101,22 @@ Ensure you are running the command from the correct directory
 Or use the full path:
 
 > jmeter -n -t C:\full\path\avg_speed_test.jmx
-⚙️ Test Configuration Summary
 
-SettingValue
+## ⚙️ Test Configuration Summary
+
+### SettingValue
+````
 Users: 20 concurrent
 Ramp‑up: 10 
 secondsLoops: 10
 Request: Method GET
 Endpoint: /api/avgSpeed
+````
 ✅ Safe for local Kubernetes clusters
+
 ✅ Suitable for load testing experiments
 
-📝 Notes for Reports / Assignments
+## 📝 Notes for Reports / Assignments
 You may include the following statement:
 
 Apache JMeter was executed from IntelliJ IDEA using the integrated terminal in non‑GUI mode. 
