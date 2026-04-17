@@ -7,7 +7,10 @@ pipeline {
 
     environment {
         JAVA_HOME = "C:\\Program Files\\Java\\jdk-21"
-        JMETER_HOME = "C:\\apache-jmeter-5.6.3\\bin"
+
+        // ✅ Keep only ONE JMeter path (global & Jenkins-visible)
+        JMETER_HOME = "C:\\Tools\\jmeter\\bin"
+
         RESULT_DIR = "results"
 
         DOCKERHUB_REPO = "amirdirin/lectdemo3010_pod_jmeter_2026"
