@@ -53,7 +53,9 @@ pipeline {
         stage('Run JMeter Performance Test') {
             steps {
                 bat """
+        if exist ${RESULT_DIR}\\report rmdir /s /q ${RESULT_DIR}\\report
         if not exist ${RESULT_DIR} mkdir ${RESULT_DIR}
+
         "%JMETER_HOME%\\bin\\jmeter.bat" ^
           -n ^
           -t jmeter\\avg_speed_test.jmx ^
