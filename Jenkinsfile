@@ -3,8 +3,7 @@ pipeline {
 
     tools {
         maven 'Maven3'
-        git 'Git'
-    }
+        }
 
     environment {
         PATH = "C:\\Program Files\\Git\\bin;${env.PATH}"
