@@ -7,10 +7,7 @@ pipeline {
 
     environment {
         JAVA_HOME = "C:\\Program Files\\Java\\jdk-21"
-
-        // ✅ Keep only ONE JMeter path (global & Jenkins-visible)
         JMETER_HOME = "C:\\Tools\\apache-jmeter-5.6.3\\bin"
-
         RESULT_DIR = "results"
 
         DOCKERHUB_REPO = "amirdirin/lectdemo3010_pod_jmeter_2026"
@@ -33,39 +30,12 @@ pipeline {
             }
         }
 
-        /*
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQubeServer') {
-                    bat """
-                    ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
-                      -Dsonar.projectKey=AverageSpeed ^
-                      -Dsonar.sources=src ^
-                      -Dsonar.projectName=avg_consol ^
-                      -Dsonar.host.url=http://localhost:9000 ^
-                      -Dsonar.login=%SONAR_TOKEN% ^
-                      -Dsonar.java.binaries=target/classes
-                    """
-                }
-            }
-        }
-        */
-        stage('Debug JMeter Path') {
-            steps {
-                bat """
-        echo === Where is JMeter? ===
-        dir C:\\Tools
-        dir C:\\Tools\\jmeter
-        dir C:\\Tools\\jmeter\\bin
-        """
-            }
-        }
         stage('Run JMeter Performance Test') {
             steps {
                 bat """
-        if not exist ${RESULT_DIR} mkdir ${RESULT_DIR}
-        "%JMETER_HOME%\\jmeter.bat" -n -t jmeter\\avg_speed_test.jmx -l ${RESULT_DIR}\\results.jtl -e -o ${RESULT_DIR}\\report
-        """
+                if not exist ${RESULT_DIR} mkdir ${RESULT_DIR}
+                "%JMETER_HOME%\\jmeter.bat" -n -t jmeter\\avg_speed_test.jmx -l ${RESULT_DIR}\\results.jtl -e -o ${RESULT_DIR}\\report
+                """
             }
         }
 
@@ -96,9 +66,7 @@ pipeline {
             script {
 
                 if (fileExists("${RESULT_DIR}/results.jtl")) {
-                    perfReport(
-                            sourceDataFiles: "${RESULT_DIR}/results.jtl"
-                    )
+                    perfReport(sourceDataFiles: "${RESULT_DIR}/results.jtl")
                 } else {
                     echo "⚠️ JMeter results.jtl not found — skipping perfReport"
                 }
