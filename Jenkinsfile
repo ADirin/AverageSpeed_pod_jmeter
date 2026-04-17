@@ -90,8 +90,14 @@ pipeline {
         always {
             script {
 
+                archiveArtifacts artifacts: "${RESULT_DIR}/**", allowEmptyArchive: true
+
                 if (fileExists("${RESULT_DIR}/results.jtl")) {
-                    perfReport(sourceDataFiles: "${RESULT_DIR}/results.jtl")
+                    perfReport(
+                            sourceDataFiles: "${RESULT_DIR}/results.jtl",
+                            errorFailedThreshold: 0,
+                            errorUnstableThreshold: 0
+                    )
                 } else {
                     echo "⚠️ JMeter results.jtl not found — skipping perfReport"
                 }
@@ -103,7 +109,8 @@ pipeline {
                                     reportFiles: 'index.html',
                                     reportName: 'JMeter Performance Report',
                                     keepAll: true,
-                                    alwaysLinkToLastBuild: true
+                                    alwaysLinkToLastBuild: true,
+                                    allowMissing: false
                             ]
                     )
                 } else {
