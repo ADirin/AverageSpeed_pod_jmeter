@@ -50,10 +50,12 @@ pipeline {
             }
         }
 
+
         stage('Run JMeter Performance Test') {
             steps {
                 bat """
         if exist ${RESULT_DIR}\\report rmdir /s /q ${RESULT_DIR}\\report
+        if exist ${RESULT_DIR}\\results.jtl del /f /q ${RESULT_DIR}\\results.jtl
         if not exist ${RESULT_DIR} mkdir ${RESULT_DIR}
 
         "%JMETER_HOME%\\bin\\jmeter.bat" ^
@@ -65,6 +67,7 @@ pipeline {
         """
             }
         }
+
 
 
         stage('Build Docker Image') {
