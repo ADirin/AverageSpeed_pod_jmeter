@@ -34,8 +34,8 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQubeServer') {
                     bat """
-                    sonar-scanner ^
-                      -Dsonar.projectKey=avg_consol ^
+                     ${tool 'SonarScanner'}\\\\bin\\\\sonar-scanner ^
+                      -Dsonar.projectKey=AverageSpeed ^
                       -Dsonar.sources=src ^
                       -Dsonar.projectName=avg_consol ^
                       -Dsonar.host.url=http://localhost:9000 ^
