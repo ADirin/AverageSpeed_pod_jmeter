@@ -26,7 +26,9 @@ AverageSpeed/
 Check that your Kubernetes pod is running:
 
 > kubectl get pods -n avgspeed
+
 Expected output:
+
 > avgspeed2-app-xxxxx   1/1   Running
 
 🔁 Step 2: Port‑Forward the Application
