@@ -1,21 +1,21 @@
-Average Speed – JMeter Performance Testing
+# Average Speed – JMeter Performance Testing
 This repository demonstrates how to run Apache JMeter performance tests against the Average Speed REST API using IntelliJ IDEA.
-The JMeter test plan (avg_speed_test.jmx) is executed in non‑GUI mode to generate a performance report suitable for analysis and CI/CD pipelines.
+#The JMeter test plan (avg_speed_test.jmx) is executed in non‑GUI mode to generate a performance report suitable for analysis
 
-🔗 API Under Test
+## 🔗 API Under Test
 GET /api/avgSpeed?distance=100&time=2
 
 Example response:
-
+````
 {
 "distance": 100.0,
 "time": 2.0,
 "averageSpeed": 50.0
 }
-
-📁 Project Structure
+````
+## 📁 Project Structure
 AverageSpeed/
-├── avg_speed_test.jmx
+├── jmeter/avg_speed_test.jmx
 ├── Dockerfile
 ├── pom.xml
 ├── Jenkinsfile
