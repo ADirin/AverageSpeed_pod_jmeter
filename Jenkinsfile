@@ -46,12 +46,13 @@ pipeline {
             }
         }
 */
+
         stage('Run JMeter Performance Test') {
             steps {
                 bat """
         if not exist results mkdir results
         "C:\\apache-jmeter-5.6.3\\bin\\jmeter.bat" -n -t jmeter\\avg_speed_test.jmx -l results\\results.jtl -e -o results\\report
-          """
+        """
             }
         }
 
