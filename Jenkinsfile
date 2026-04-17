@@ -6,6 +6,7 @@ pipeline {
     }
 
     environment {
+        PATH = "C:\\Program Files\\Git\\bin;${env.PATH}"
         PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
         JAVA_HOME = "C:\\Program Files\\Java\\jdk-21"
         JMETER_HOME = "C:\\Tools\\apache-jmeter-5.6.3\\bin"
